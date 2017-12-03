@@ -12,7 +12,7 @@
 *.config
 *.csproj
 
-*/Properties
+*/*/Properties
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
