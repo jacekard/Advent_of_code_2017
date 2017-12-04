@@ -49,7 +49,7 @@ namespace Day_4 {
                     for (int j = 0; j < list.Count; j++) {
                         if (i == j) continue;
 
-                        if (list[i].Size == list[j].Size) {
+                        if (list[i].Value.Equals(list[j].Value) == true) {
                             isValid2 = false;
                             break;
                         }
@@ -63,9 +63,8 @@ namespace Day_4 {
                 list.Clear();
             }
 
-
-
             Console.WriteLine(countValidLines1);
+
             Console.WriteLine(countValidLines2);
 
         }
@@ -77,13 +76,10 @@ namespace Day_4 {
         public Word(string value) {
             Value = value;
             Size = 0;
-            countSize();
+            Sort();
         }
-        public void countSize() {
-            byte[] asciiBytes = Encoding.ASCII.GetBytes(Value);
-            foreach (byte b in asciiBytes) {
-                Size += b;
-            }
+        public void Sort() {
+           Value = new string(Value.OrderBy(c => c).ToArray());
         }
     }
 }
