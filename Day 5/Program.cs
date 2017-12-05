@@ -11,22 +11,17 @@ namespace Day_5 {
             List<int> list = new List<int>();
 
             int counter = 0;
-            string line="";
-            while(line != null) {
-                line = Console.ReadLine();
-                if (line == null)
-                    break;
+            string line = Console.ReadLine();
+            while (line != null) {
                 list.Add(int.Parse(line));
+                line = Console.ReadLine();
             }
 
-            bool isDone = false;
             int i = 0;
             int v = 0;
-            int size = list.Count;
 
             //exercise 1 & 2 are almost the same so here's just 2nd part
-
-            while(!isDone) {
+            while (i < list.Count) {
                 i += list[i];
                 if (list[v] >= 3)
                     list[v]--;
@@ -34,8 +29,6 @@ namespace Day_5 {
                     list[v]++;
                 v = i;
                 counter++;
-                if (i >= size)
-                    isDone = true;
             }
             Console.WriteLine(counter);
         }
