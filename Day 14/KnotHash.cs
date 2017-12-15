@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day_10 {
-    class Program2 {
-        static void Main(string[] args) {
+namespace Day_14 {
+    class KnotHash {
+
+        public static string CalculateKnotHash(string input) {
             const int arraySize = 256;
             int position = 0, skip = 0;
             List<int> array = new List<int>();
@@ -16,8 +17,8 @@ namespace Day_10 {
             }
 
             List<int> subArray = new List<int>();
-            string line = Console.ReadLine();
-            foreach (char c in line) {
+            
+            foreach (char c in input) {
                 lengths.Add(c);
             }
             lengths.AddRange(new List<int> { 17, 31, 73, 47, 23 });
@@ -53,13 +54,20 @@ namespace Day_10 {
                 dense_hash.Add(hash);
             }
 
+            string output ="";
+
             foreach (int num in dense_hash) {
-                if (num < 16) Console.Write("0");
-                Console.Write(num.ToString("X"));
+                if (num < 16)
+                    output += '0';                    
+                output += num.ToString("X");
             }
+
+            return output;
         }
 
 
     }
 }
+
+
 
