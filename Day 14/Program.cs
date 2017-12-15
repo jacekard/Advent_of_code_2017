@@ -14,28 +14,76 @@ namespace Day_14 {
         };
 
         static void Main(string[] args) {
-            const int gridSize = 128;
             string hash = "oundnydw-";
-            int[,] grid = new int[gridSize];
+            Square.gridSize = 128;
             int sum = 0;
-            for (int i = 0; i < gridSize; i++) {
+            int numOfRegions = 0;
+
+            Square.grid = new Square[Square.gridSize, Square.gridSize];
+
+            for (int i = 0; i < Square.gridSize; i++) {
+
                 string newhash = KnotHash.CalculateKnotHash(hash + i);
                 StringBuilder row = new StringBuilder();
-                Console.WriteLine(newhash);
+
                 foreach (char z in newhash) {
                     row.Append(hexCharToBin[char.ToLower(z)]);
                 }
-                foreach(char z in row.ToString()) {
-                    sum += z - '0';
+
+                for (int j = 0; j < Square.gridSize; j++) {
+                    Square.grid[j, i] = new Square(i, j);
+                    Square.grid[j, i].Val = row[j] - '0';
+                    sum += row[j] - '0';
                 }
             }
+
+            foreach (var square in Square.grid) {
+                if (square.Visited == false && square.Val == 1) {
+                    square.lookForRegions();
+                    numOfRegions++;
+                }
+            }
+
             Console.WriteLine(sum);
+            Console.WriteLine(numOfRegions);
+
         }
     }
 
     class Square {
-        public Square() {
+        public static Square[,] grid;
+        public static int gridSize;
 
+        public int Val { get; set; }
+        public bool Visited { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public Square(int j, int i) {
+            Val = 0;
+            Visited = false;
+            x = j;
+            y = i;
+        }
+        public bool isCoordValid(int i) {
+            bool valid = true;
+            if (i < 0 || i >= gridSize)
+                valid = false;
+
+            return valid;
+        }
+        public void lookForRegions() {
+            if (Visited == true || Val == 0) return;
+            Visited = true;
+
+            if (isCoordValid(x + 1))
+                Square.grid[x + 1, y].lookForRegions();
+            if (isCoordValid(x - 1))
+                Square.grid[x - 1, y].lookForRegions();
+            if (isCoordValid(y - 1))
+                Square.grid[x, y - 1].lookForRegions();
+            if (isCoordValid(y + 1))
+                Square.grid[x, y + 1].lookForRegions();
         }
     }
 }

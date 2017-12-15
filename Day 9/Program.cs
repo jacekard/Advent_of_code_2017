@@ -32,9 +32,6 @@ namespace Day_9 {
                 }
                 else if (line[i].Equals('!'))
                     i++;
-                //else if (line[i].Equals(',')) {
-                //    if (groupSize == 1)
-                //        groupSize = 0;
             }
             Console.WriteLine(score);
             Console.WriteLine(charCount);
