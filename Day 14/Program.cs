@@ -31,7 +31,7 @@ namespace Day_14 {
                 }
 
                 for (int j = 0; j < Square.gridSize; j++) {
-                    Square.grid[j, i] = new Square(i, j);
+                    Square.grid[j, i] = new Square(j, i);
                     Square.grid[j, i].Val = row[j] - '0';
                     sum += row[j] - '0';
                 }
@@ -73,7 +73,7 @@ namespace Day_14 {
             return valid;
         }
         public void lookForRegions() {
-            if (Visited == true || Val == 0) return;
+            if (Visited == true || Val==0) return;
             Visited = true;
 
             if (isCoordValid(x + 1))
