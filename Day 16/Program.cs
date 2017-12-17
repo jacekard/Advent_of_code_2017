@@ -21,51 +21,53 @@ namespace Day_16 {
                 list[i] = (char)('a' + i);
             }
 
-            foreach (var move in moves) {
-                switch (move[0]) {
-                    case 's':
-                    int num = int.Parse(move.Substring(1));
-                    for (int j = 1, i = numOfProgs - num; j <= num; i++, j++) {
-                        for (int k = i; k >= j; k--) {
-                            swap(list, k, k - 1);
+            for (int l = 0; l < Math.Pow(140, 2); l++) {
+                foreach (var move in moves) {
+                    switch (move[0]) {
+                        case 's':
+                        int num = int.Parse(move.Substring(1));
+                        for (int j = 1, i = numOfProgs - num; j <= num; i++, j++) {
+                            for (int k = i; k >= j; k--) {
+                                swap(list, k, k - 1);
+                            }
                         }
+                        break;
+
+                        case 'x':
+                        string[] xchg = move.Substring(1).Split('/');
+                        int[] vals = Array.ConvertAll(xchg, int.Parse);
+
+                        swap(list, vals[0], vals[1]);
+
+
+                        break;
+
+                        case 'p':
+                        string[] partner = move.Substring(1).Split('/');
+
+                        int A = -1, B = -1;
+                        bool hasFoundA = false, hasFoundB = false;
+                        for (int i = 0; i < numOfProgs; i++) {
+                            if (list[i] == partner[0].First()) {
+                                A = i;
+                                hasFoundA = true;
+                            }
+                            else if (list[i] == partner[1].First()) {
+                                B = i;
+                                hasFoundB = true;
+                            }
+                            if (hasFoundA && hasFoundB)
+                                break;
+                        }
+                        swap(list, A, B);
+
+                        break;
+
+                        default: break;
                     }
-                    break;
-
-                    case 'x':
-                    string[] xchg = move.Substring(1).Split('/');
-                    int[] vals = Array.ConvertAll(xchg, int.Parse);
-
-                    swap(list, vals[0], vals[1]);
-
-
-                    break;
-
-                    case 'p':
-                    string[] partner = move.Substring(1).Split('/');
-
-                    int A = -1, B = -1;
-                    bool hasFoundA = false, hasFoundB = false;
-                    for (int i = 0; i < numOfProgs; i++) {
-                        if (list[i] == partner[0].First()) {
-                            A = i;
-                            hasFoundA = true;
-                        }
-                        else if (list[i] == partner[1].First()) {
-                            B = i;
-                            hasFoundB = true;
-                        }
-                        if (hasFoundA && hasFoundB)
-                            break;
-                    }
-                    swap(list, A, B);
-
-                    break;
-
-                    default: break;
                 }
+                Console.WriteLine(list);
             }
-            Console.WriteLine(list);
         }
     }
 }
