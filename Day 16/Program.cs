@@ -20,8 +20,8 @@ namespace Day_16 {
             for (int i = 0; i < numOfProgs; i++) {
                 list[i] = (char)('a' + i);
             }
-
-            for (int l = 0; l < Math.Pow(140, 2); l++) {
+            int iters = 1000000000 % 60;
+            for (int l = 0; l < iters; l++) {
                 foreach (var move in moves) {
                     switch (move[0]) {
                         case 's':
