@@ -16,8 +16,6 @@ namespace Day_7 {
                 string[] elements = line.Split(' ');
 
                 string progName = elements[0];
-                //Prog p = new Prog(elements[0], int.Parse(progName));
-                //list.Add(p);
 
                 if (!map.ContainsKey(progName)) {
                     map[progName] = 0;
@@ -26,7 +24,7 @@ namespace Day_7 {
                 for (int j = 3; j < elements.Length; j++) {
                     if (j != elements.Length - 1) {
                         string neighborName = elements[j].Substring(0, elements[j].Length - 1);
-                        //p.Neighbors.Add(neighborName);
+
                         if (map.ContainsKey(neighborName))
                             map[neighborName]++;
                         else
@@ -66,13 +64,5 @@ namespace Day_7 {
             Weight = weight;
             Neighbors = new List<string>();
         }
-        //public Prog getNeighbor(string name) {
-        //    foreach(var e in neighbors) {
-        //        if (e.Equals(name)) {
-
-        //            return p;
-        //        }
-        //    }
-        //}
     }
 }
